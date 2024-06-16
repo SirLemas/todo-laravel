@@ -5,16 +5,14 @@ on:
       - main
 jobs:
   teste:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "iniciando testes ..."
-
-      - name: Executando testes no laravel
       - uses: actions/checkout@v4
       - run: php artisan test
 
   deploy:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     #  permissions:
     #   contents: write
     steps:
