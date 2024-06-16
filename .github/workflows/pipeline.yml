@@ -11,9 +11,6 @@ jobs:
 
     - name: Buildando e subindo os containers
       run: docker compose up -d --build
-    
-    - name: Copiando o .env.example para .env dentro do container
-      run: docker-compose exec php cp .env.example .env
 
     - name: Configurando variáveis de ambiente do .env
       run: |
