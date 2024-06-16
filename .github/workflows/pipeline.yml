@@ -12,13 +12,6 @@ jobs:
     - name: Buildando e subindo os containers
       run: docker compose up -d --build
 
-    - name: Configurando variáveis de ambiente do .env
-      run: |
-        docker-compose exec php sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/' .env
-        docker-compose exec php sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
-        docker-compose exec php sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.USER }}/' .env
-        docker-compose exec php sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.PASSWORD }}/' .env
-
     - name: instalando composer
       run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
 
