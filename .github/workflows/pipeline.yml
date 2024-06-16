@@ -17,7 +17,7 @@ jobs:
     #     ports:
     #       - 3307:3306
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
 
     # - name: Instalando o docker compose para subir os serviços
     #   run: sudo apt-get install -y docker-compose
