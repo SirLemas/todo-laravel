@@ -43,8 +43,11 @@ jobs:
       - name: Dar checkout para a branch master
         run: git checkout master
 
+      - name: Baixa branches novas no projeto
+        run: git fetch
+
       - name: Realiza merge branch pipeline com a master
-        run: git pull origin/pipeline
+        run: git pull pipeline
 
       - name: Sobe alterações/atualizações para a master
         run: git push master
