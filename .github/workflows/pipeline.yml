@@ -24,23 +24,12 @@ jobs:
 
     - name: Buildando e subindo os containers
       run: docker-compose up -d --build
-    
-    # - name: Instalando o composer
-    #   run: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-    - name: Instalando o composer
-      uses: docker://composer:latest
-      with:
-        args: install
-
-    - name: Instalando as dependências do composer
-      run: docker-compose exec php sh -c ' echo "Running composer install..." composer install --no-interaction --no-plugins --no-scripts'    
+  
+    # - name: Instalando as dependências do composer
+    #   run: docker-compose exec php sh -c ' echo "Running composer install..." composer install --no-interaction --no-plugins --no-scripts'    
 
     - name: Copiando o .env.example para .env dentro do container
       run: docker-compose exec php cp .env.example .env
-
-    - name: Gerando o app_key
-      run: docker-compose exec php php artisan key:generate
 
     - name: Configurando variáveis de ambiente do .env
       run: |
@@ -49,6 +38,9 @@ jobs:
         docker-compose exec php sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.USER }}/' .env
         docker-compose exec php sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.PASSWORD }}/' .env
 
+    - name: Gerando o app_key
+      run: docker-compose exec php php artisan key:generate
+  
     - name: Rodando as migrations
       run: docker-compose exec php php artisan migrate --force
 
