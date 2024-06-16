@@ -14,11 +14,6 @@ jobs:
           MYSQL_DATABASE: ${{secrets.DB_DATABASE}}
           MYSQL_USER: ${{secrets.USER}}
           MYSQL_PASSWORD: ${{secrets.DB_PASSWORD}}
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
         ports:
           - 3307:3306
     steps:
@@ -31,7 +26,7 @@ jobs:
       run: docker-compose up -d --build
 
     - name: Instalando as dependências do composer
-      run: docker-compose exec php sh -c ' echo "Running composer install..." composer install --prefer-dist --no-progress --no-suggest --no-interaction '
+      run: docker-compose exec php sh -c ' echo "Running composer install..." composer install --no-interaction --no-plugins --no-scripts'
 
     - name: Copiando o .env.example para .env dentro do container
       run: docker-compose exec php cp .env.example .env
@@ -39,7 +34,7 @@ jobs:
     - name: Gerando o app_key
       run: docker-compose exec php php artisan key:generate
 
-    - name: Configure Laravel .env
+    - name: Configurando variáveis de ambiente do .env
       run: |
         docker-compose exec php sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/' .env
         docker-compose exec php sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
@@ -75,16 +70,11 @@ jobs:
       - name: Baixa branches novas no projeto
         run: git fetch
 
-      # - name: Cria uma branch local chamada pipeline
-      #   run: git checkout -b pipeline
       - name: Dar checkout para a branch master
         run: git checkout master
 
       - name: Realiza merge com a pipeline
         run: git merge origin pipeline
-
-      # - name: Força atualizações para pipeline
-      #   run: git push --force origin pipeline
 
       - name: Subindo alterações para a master
         run: git push origin mater
