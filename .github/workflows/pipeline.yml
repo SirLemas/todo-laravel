@@ -4,26 +4,26 @@ on:
     branches:
       - master
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest   
-  #   steps:
-  #   - uses: actions/checkout@v4
+  test:
+    runs-on: ubuntu-latest   
+    steps:
+    - uses: actions/checkout@v4
 
-  #   - name: Buildando e subindo os containers
-  #     run: docker compose up -d --build
+    - name: Buildando e subindo os containers
+      run: docker compose up -d --build
 
-  #   - name: instalando composer
-  #     run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
+    - name: instalando composer
+      run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
 
-  #   - name: Executando os testes do laravel
-  #     run: docker compose exec php php artisan test --testsuite=Unit
+    - name: Executando os testes do laravel
+      run: docker compose exec php php artisan test --testsuite=Unit
 
-  #   - name: Derrubando o docker-compose
-  #     if: always()
-  #     run: docker compose down
+    - name: Derrubando o docker-compose
+      if: always()
+      run: docker compose down
 
   deploy:
-    # needs: test
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write
