@@ -22,30 +22,8 @@ jobs:
     # - name: Instalando o docker compose para subir os serviços
     #   run: sudo apt-get install -y docker-compose
 
-    # - name: Buildando e subindo os containers
-    #   run: docker-compose up -d --build
-  
-    # - name: Instalando as dependências do composer
-    #   run: docker-compose exec php sh -c ' echo "Running composer install..." composer install --no-interaction --no-plugins --no-scripts'    
-
-    # - name: Copiando o .env.example para .env dentro do container
-    #   run: docker-compose exec php cp .env.example .env
-
-    # - name: Configurando variáveis de ambiente do .env
-    #   run: |
-    #     docker-compose exec php sed -i 's/DB_HOST=127.0.0.1/DB_HOST=db/' .env
-    #     docker-compose exec php sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.DB_DATABASE }}/' .env
-    #     docker-compose exec php sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.USER }}/' .env
-    #     docker-compose exec php sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.PASSWORD }}/' .env
-
-    # - name: Gerando o app_key
-    #   run: docker-compose exec php php artisan key:generate
-  
-    # - name: Rodando as migrations
-    #   run: docker-compose exec php php artisan migrate --force
-
-    - name: Subindo os containers
-      run: docker-compose up -d
+    - name: Buildando e subindo os containers
+      run: docker-compose up -d --build
 
     - name: Executando os testes do laravel
       run: docker-compose exec php php artisan test
