@@ -40,14 +40,20 @@ jobs:
       - name: verifica as branches
         run: git branch
 
+      - name: Baixa branches novas no projeto
+        run: git fetch
+
       - name: Dar checkout para a branch master
         run: git checkout master
 
       - name: Baixa branches novas no projeto
         run: git fetch
+      
+      - name: verifica as branches
+        run: git branch
 
       - name: Realiza merge branch pipeline com a master
-        run: git pull pipeline
+        run: git merge pipeline
 
       - name: Sobe alterações/atualizações para a master
         run: git push master
