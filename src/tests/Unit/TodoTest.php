@@ -35,60 +35,60 @@ class TodoTest extends TestCase
     }
 
     // /** @test */
-    // public function it_can_create_a_todo_with_valid_data()
-    // {
-    //     $response = $this->postJson('/api/todo', [
-    //         'title' => 'Test Todo',
-    //         'description' => 'This is a test description',
-    //         'done' => false,
-    //     ]);
+    public function it_can_create_a_todo_with_valid_data()
+    {
+        $response = $this->postJson('/api/todo', [
+            'title' => 'Test Todo',
+            'description' => 'This is a test description',
+            'done' => false,
+        ]);
 
-    //     $response->assertStatus(201)
-    //              ->assertJson(['message' => 'Lista criada com sucesso']);
+        $response->assertStatus(201)
+                 ->assertJson(['message' => 'Lista criada com sucesso']);
 
-    //     $this->assertDatabaseHas('todos', [
-    //         'title' => 'Test Todo',
-    //         'description' => 'This is a test description',
-    //         'done' => false,
-    //     ]);
-    // }
-
-    // /** @test */
-    // public function it_can_update_a_todo()
-    // {
-    //     $todo = Todo::create([
-    //         'title' => 'Initial Title',
-    //         'description' => 'Initial Description',
-    //         'done' => false,
-    //     ]);
-
-    //     $response = $this->putJson("/api/todo/{$todo->id}", [
-    //         'title' => 'Updated Title',
-    //         'description' => 'Updated Description',
-    //         'done' => true,
-    //     ]);
-
-    //     $response->assertStatus(201)
-    //              ->assertJson(['message' => 'Lista atualizada com sucesso']);
-
-    //     $this->assertDatabaseHas('todos', [
-    //         'id' => $todo->id,
-    //         'title' => 'Updated Title',
-    //         'description' => 'Updated Description',
-    //         'done' => true,
-    //     ]);
-    // }
+        $this->assertDatabaseHas('todos', [
+            'title' => 'Test Todo',
+            'description' => 'This is a test description',
+            'done' => false,
+        ]);
+    }
 
     // /** @test */
-    // public function it_returns_404_when_updating_non_existent_todo()
-    // {
-    //     $response = $this->putJson('/api/todo/999', [
-    //         'title' => 'Updated Title',
-    //         'description' => 'Updated Description',
-    //         'done' => true,
-    //     ]);
+    public function it_can_update_a_todo()
+    {
+        $todo = Todo::create([
+            'title' => 'Initial Title',
+            'description' => 'Initial Description',
+            'done' => false,
+        ]);
 
-    //     $response->assertStatus(404)
-    //              ->assertJson(['message' => 'A lista nao foi encontrada']);
-    // }
+        $response = $this->putJson("/api/todo/{$todo->id}", [
+            'title' => 'Updated Title',
+            'description' => 'Updated Description',
+            'done' => true,
+        ]);
+
+        $response->assertStatus(201)
+                 ->assertJson(['message' => 'Lista atualizada com sucesso']);
+
+        $this->assertDatabaseHas('todos', [
+            'id' => $todo->id,
+            'title' => 'Updated Title',
+            'description' => 'Updated Description',
+            'done' => true,
+        ]);
+    }
+
+    // /** @test */
+    public function it_returns_404_when_updating_non_existent_todo()
+    {
+        $response = $this->putJson('/api/todo/999', [
+            'title' => 'Updated Title',
+            'description' => 'Updated Description',
+            'done' => true,
+        ]);
+
+        $response->assertStatus(404)
+                 ->assertJson(['message' => 'A lista nao foi encontrada']);
+    }
 }
