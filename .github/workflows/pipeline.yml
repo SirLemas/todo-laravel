@@ -18,9 +18,9 @@ jobs:
     - name: Executando os testes do laravel
       run: docker compose exec php php artisan test --testsuite=Unit
 
-    - name: Derrubando o docker-compose
-      if: always()
-      run: docker compose down
+    # - name: Derrubando o docker-compose
+    #   if: always()
+    #   run: docker compose down
 
   deploy:
     needs: test
@@ -43,13 +43,10 @@ jobs:
       - name: Dar checkout para a branch master
         run: git checkout master
 
-      - name: Atualiza branch master para não ter problemas
-        run: git pull origin master
-
       - name: Realiza merge branch pipeline com a master
-        run: git merge origin/pipeline
+        run: git pull pipeline
 
       - name: Sobe alterações/atualizações para a master
-        run: git push origin/master
+        run: git push master
 
     
