@@ -1,0 +1,34 @@
+name: Enviar alterações para branch MAIN
+on:
+  push:
+    branches:
+      - main
+jobs:
+  teste:
+    runs_on: ubuntu-latest
+    steps:
+      - run: echo "iniciando testes ..."
+
+      - name: Executando testes no laravel
+      - uses: actions/checkout@v4
+      - run: php artisan test
+
+  deploy:
+    runs_on: ubuntu-latest
+    #  permissions:
+    #   contents: write
+    steps:
+      - run: echo "Inicia deploy para produção ..."
+
+      # - name: Configura o git
+      #   run: |
+      #     git config --local user.name "${{secrets.NOME}}"
+      #     git config --local user.email "${{secrets.EMAIL}}"
+
+      # - name: Baixa branch pipeline e realiza merge com a main
+      # - run: git fetch
+      # - run: git checkout -b pipeline
+      # - run: git merge master
+      # - run: git push --force origin pipeline
+
+    
