@@ -11,7 +11,7 @@ class TodoTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function testando_soma()
+    public function realizando_soma_de_dois_numeros()
     {
         $valor1 = 1;
         $valor2 = 2;
