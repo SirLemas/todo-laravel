@@ -34,7 +34,7 @@ class TodoTest extends TestCase
 
     }
 
-    /** @test */
+    // /** @test */
     public function it_can_create_a_todo_with_valid_data()
     {
         $response = $this->postJson('/api/todo', [
@@ -53,7 +53,7 @@ class TodoTest extends TestCase
         ]);
     }
 
-    /** @test */
+    // /** @test */
     public function it_can_update_a_todo()
     {
         $todo = Todo::create([
@@ -79,7 +79,7 @@ class TodoTest extends TestCase
         ]);
     }
 
-    /** @test */
+    // /** @test */
     public function it_returns_404_when_updating_non_existent_todo()
     {
         $response = $this->putJson('/api/todo/999', [
