@@ -22,17 +22,17 @@ class TodoTest extends TestCase
     }
 
     /** @test */
-    // public function it_requires_a_title_to_create_a_todo()
-    // {
-    //     $response = $this->postJson('/api/todo', [
-    //         'description' => 'This is a test description',
-    //         'done' => false,
-    //     ]);
+    public function it_requires_a_title_to_create_a_todo()
+    {
+        $response = $this->postJson('/api/todo', [
+            'description' => 'This is a test description',
+            'done' => false,
+        ]);
 
-    //     $response->assertStatus(422)
-    //             ->assertJson(['message' => 'A propriedade title e obrigatoria']);
+        $response->assertStatus(422)
+                ->assertJson(['message' => 'A propriedade title e obrigatoria']);
 
-    // }
+    }
 
     // /** @test */
     // public function it_can_create_a_todo_with_valid_data()
