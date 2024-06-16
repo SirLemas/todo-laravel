@@ -12,6 +12,9 @@ jobs:
     - name: Buildando e subindo os containers
       run: docker compose up -d --build
 
+    - name: instalando composer
+      run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
+
     - name: Executando os testes do laravel
       run: docker compose exec -it php php artisan test
 
