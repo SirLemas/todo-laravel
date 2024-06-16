@@ -2,7 +2,7 @@ name: Enviar alterações para branch MAIN
 on:
   push:
     branches:
-      - pipeline
+      - master
 jobs:
   # test:
   #   runs-on: ubuntu-latest   
@@ -36,26 +36,15 @@ jobs:
         run: |
           git config --global user.name "${{secrets.GH_NAME}}"
           git config --global user.email "${{secrets.GH_EMAIL}}"
-
-      - name: verifica as branches
-        run: git branch
-
+      
       - name: Baixa branches novas no projeto
         run: git fetch
 
       - name: Dar checkout para a branch master
-        run: git checkout master
-
-      - name: Baixa branches novas no projeto
-        run: git fetch
-      
-      - name: verifica as branches
-        run: git branch
-
+        run: git checkout -B pipeline
+        
       - name: Realiza merge branch pipeline com a master
-        run: git merge pipeline --allow-unrelated-histories
+        run: git merge master
 
       - name: Sobe alterações/atualizações para a master
-        run: git push master
-
-    
+        run: git push --force origin pipeline    
