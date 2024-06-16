@@ -38,11 +38,11 @@ jobs:
     #     docker-compose exec php sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.USER }}/' .env
     #     docker-compose exec php sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.PASSWORD }}/' .env
 
-    - name: Gerando o app_key
-      run: docker-compose exec php php artisan key:generate
+    # - name: Gerando o app_key
+    #   run: docker-compose exec php php artisan key:generate
   
-    - name: Rodando as migrations
-      run: docker-compose exec php php artisan migrate --force
+    # - name: Rodando as migrations
+    #   run: docker-compose exec php php artisan migrate --force
 
     - name: Executando os testes do laravel
       run: docker-compose exec php php artisan test
