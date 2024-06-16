@@ -6,27 +6,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # services:
-    #   mysql:
-    #     image: mysql:latest
-    #     env:
-    #       MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD_ROOT}}
-    #       MYSQL_DATABASE: ${{secrets.DB_DATABASE}}
-    #       MYSQL_USER: ${{secrets.USER}}
-    #       MYSQL_PASSWORD: ${{secrets.DB_PASSWORD}}
-    #     ports:
-    #       - 3307:3306
     steps:
     - uses: actions/checkout@v2
-
-    # - name: Instalando o docker compose para subir os serviços
-    #   run: sudo apt-get install -y docker-compose
 
     - name: Buildando e subindo os containers
       run: docker compose up -d --build
 
     - name: Executando os testes do laravel
-      run: docker compose exec php php artisan test
+      run: docker compose exec php ./vendor/bin/phpunit 
 
     - name: Derrubando o docker-compose
       if: always()
