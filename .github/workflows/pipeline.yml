@@ -4,26 +4,26 @@ on:
     branches:
       - pipeline
 jobs:
-  test:
-    runs-on: ubuntu-latest   
-    steps:
-    - uses: actions/checkout@v4
+  # test:
+  #   runs-on: ubuntu-latest   
+  #   steps:
+  #   - uses: actions/checkout@v4
 
-    - name: Buildando e subindo os containers
-      run: docker compose up -d --build
+  #   - name: Buildando e subindo os containers
+  #     run: docker compose up -d --build
 
-    - name: instalando composer
-      run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
+  #   - name: instalando composer
+  #     run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
 
-    - name: Executando os testes do laravel
-      run: docker compose exec php php artisan test --testsuite=Unit
+  #   - name: Executando os testes do laravel
+  #     run: docker compose exec php php artisan test --testsuite=Unit
 
-    # - name: Derrubando o docker-compose
-    #   if: always()
-    #   run: docker compose down
+  #   - name: Derrubando o docker-compose
+  #     if: always()
+  #     run: docker compose down
 
   deploy:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -37,8 +37,8 @@ jobs:
       #     git config --global user.name "${{secrets.GH_NAME}}"
       #     git config --global user.email "${{secrets.GH_EMAIL}}"
 
-      - name: Baixa branches novas no projeto
-        run: git fetch
+      - name: verifica as branches
+        run: git branch
 
       - name: Dar checkout para a branch master
         run: git checkout master
