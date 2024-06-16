@@ -31,7 +31,7 @@ jobs:
       run: docker-compose up -d --build
 
     - name: Instalando as dependências do composer
-      run: docker-compose exec php composer install --prefer-dist --no-progress --no-suggest --no-interaction
+      run: docker-compose exec php sh -c "composer install --prefer-dist --no-progress --no-suggest --no-interaction < /dev/null"
 
     - name: Copiando o .env.example para .env dentro do container
       run: docker-compose exec php cp .env.example .env
