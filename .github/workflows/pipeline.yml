@@ -44,12 +44,12 @@ jobs:
         run: git checkout master
 
       - name: Atualiza branch master para não ter problemas
-        run: git pull master
+        run: git pull origin master
 
       - name: Realiza merge branch pipeline com a master
-        run: git merge pipeline
+        run: git merge origin/pipeline
 
       - name: Sobe alterações/atualizações para a master
-        run: git push master
+        run: git push origin/master
 
     
