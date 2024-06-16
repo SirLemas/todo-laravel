@@ -12,6 +12,7 @@ jobs:
       - run: php artisan test
 
   deploy:
+    needs: teste
     runs-on: ubuntu-latest
     #  permissions:
     #   contents: write
