@@ -2,7 +2,7 @@ name: Enviar alterações para branch MAIN
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   teste:
     runs-on: ubuntu-latest
