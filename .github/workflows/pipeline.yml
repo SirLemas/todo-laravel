@@ -32,10 +32,10 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      # - name: Configura o git
-      #   run: |
-      #     git config --global user.name "${{secrets.GH_NAME}}"
-      #     git config --global user.email "${{secrets.GH_EMAIL}}"
+      - name: Configura o git
+        run: |
+          git config --global user.name "${{secrets.GH_NAME}}"
+          git config --global user.email "${{secrets.GH_EMAIL}}"
 
       - name: verifica as branches
         run: git branch
