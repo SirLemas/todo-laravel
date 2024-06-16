@@ -20,6 +20,7 @@ class TodoTest extends TestCase
 
         $response->assertStatus(422)
                 ->assertJson(['message' => 'A propriedade title e obrigatoria']);
+
     }
 
     /** @test */
