@@ -24,8 +24,6 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Instalar as dependências do Laravel
 RUN composer install --no-interaction --no-plugins --no-scripts
 
-RUN php artisan key:generate --no-interaction
-
 # Expor a porta 9000 para o PHP-FPM
 EXPOSE 9000
 
