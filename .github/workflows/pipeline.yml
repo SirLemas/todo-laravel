@@ -10,10 +10,14 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Buildando e subindo os containers
-      run: docker compose up --detach --build --wait --wait-timeout 30
+      run: docker compose up -d --build
 
     - name: instalando composer
       run: docker compose exec php sh -c "composer install --no-interaction --no-plugins --no-scripts"
+
+    - name: Aguardando mysql
+      run: sleep 5s
+      shell: bash
 
     - name: Executando os testes do laravel
       run: docker compose exec php php artisan test --testsuite=Unit
